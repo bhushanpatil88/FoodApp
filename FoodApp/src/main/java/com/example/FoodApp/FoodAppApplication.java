@@ -14,9 +14,4 @@ public class FoodAppApplication {
 		SpringApplication.run(FoodAppApplication.class, args);
 	}
 
-//	@Bean
-//	public PlatformTransactionManager MyTransaction(MongoDatabaseFactory dbFactory){
-//		return new MongoTransactionManager(dbFactory);
-//	}
-
 }

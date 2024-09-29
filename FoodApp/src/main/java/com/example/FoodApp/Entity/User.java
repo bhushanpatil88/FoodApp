@@ -23,8 +23,10 @@ public class User {
     @Id
     private ObjectId id;
 
-    private String fullname;
+    private String fullName;
     private String email;
+
+    @JsonIgnore
     private String password;
     private USER_ROLE roles;
 

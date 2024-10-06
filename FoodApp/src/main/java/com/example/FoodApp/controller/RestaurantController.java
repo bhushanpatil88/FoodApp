@@ -2,7 +2,6 @@ package com.example.FoodApp.controller;
 
 import com.example.FoodApp.Entity.Restaurant;
 import com.example.FoodApp.Entity.User;
-import com.example.FoodApp.Request.CreateRestaurantRequest;
 import com.example.FoodApp.Service.RestaurantService;
 import com.example.FoodApp.Service.UserService;
 import com.example.FoodApp.dto.RestaurantDto;

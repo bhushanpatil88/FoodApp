@@ -10,5 +10,5 @@ public interface RestaurantRepository extends MongoRepository<Restaurant,Object>
     @Query("{ '$or': [ { 'name': { '$regex': ?0, '$options': 'i' } }, { 'cuisineType': { '$regex': ?0, '$options': 'i' } } ] }")
     List<Restaurant> findBySearchQuery(String query);
 
-    Restaurant findbyOwnerId(Object ownerId);
+    Restaurant findByOwnerId(Object ownerId);
 }

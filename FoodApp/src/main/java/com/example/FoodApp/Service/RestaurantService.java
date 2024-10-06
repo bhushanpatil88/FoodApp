@@ -84,7 +84,7 @@ public class RestaurantService {
     }
 
     public Restaurant getRestaurantByUserId(ObjectId userId)throws Exception{
-        Restaurant restaurant = restaurantRepository.findbyOwnerId(userId);
+        Restaurant restaurant = restaurantRepository.findByOwnerId(userId);
         if(restaurant == null){
             throw new Exception("Restaurant not found with owner id : " + userId);
         }

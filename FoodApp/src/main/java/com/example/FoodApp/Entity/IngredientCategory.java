@@ -25,6 +25,6 @@ public class IngredientCategory {
     private Restaurant restaurant;
 
     @DBRef
-    private List<Ingredient> ingredients = new ArrayList<>();
+    private List<IngredientItem> ingredients = new ArrayList<>();
 }
 

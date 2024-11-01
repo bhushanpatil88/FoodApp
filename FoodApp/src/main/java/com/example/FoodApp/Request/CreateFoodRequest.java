@@ -1,7 +1,7 @@
 package com.example.FoodApp.Request;
 
 import com.example.FoodApp.Entity.Category;
-import com.example.FoodApp.Entity.Ingredient;
+import com.example.FoodApp.Entity.IngredientItem;
 import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -20,6 +20,6 @@ public class CreateFoodRequest {
     private boolean vegetarian;
     private boolean seasonal;
     @DBRef
-    private List<Ingredient> ingredients;
+    private List<IngredientItem> ingredients;
 
 }

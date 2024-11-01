@@ -32,7 +32,7 @@ public class Food {
     private boolean isSeasonal;
 
     @DBRef
-    private List<Ingredient> ingredients = new ArrayList<>();
+    private List<IngredientItem> ingredients = new ArrayList<>();
 
     private Date createdAt;
 

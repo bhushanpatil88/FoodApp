@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FoodService {
@@ -41,15 +43,57 @@ public class FoodService {
     public List<Food> getRestaurantFood(ObjectId restaurantId,boolean isVegetarian,
                                         boolean isNonVeg, boolean isSeasonal,
                                         String foodCategory){
-        return foodRepository.findByRestaurantId(restaurantId);
+        List<Food> foods =  foodRepository.findByRestaurantId(restaurantId);
+        if(isVegetarian){
+            foods = filterByVegetarian(foods, isVegetarian);
+        }
+        if(isNonVeg){
+            foods = filterByNonVeg(foods,isNonVeg);
+        }
+        if(isSeasonal){
+            foods = filterBySeasonal(foods,isSeasonal);
+        }
+        if(foodCategory!=null && !foodCategory.equals("")){
+            foods = filterByCategory(foods, foodCategory);
+        }
+
+        return foods;
     }
+
+    private List<Food> filterByNonVeg(List<Food> foods, boolean isNonVeg) {
+        return foods.stream().filter(food -> !food.isVegetarian()).collect(Collectors.toList());
+    }
+
+    private List<Food> filterBySeasonal(List<Food> foods, boolean isSeasonal) {
+        return  foods.stream().filter(food -> food.isSeasonal()==isSeasonal).collect(Collectors.toList());
+    }
+
+    private List<Food> filterByCategory(List<Food> foods, String foodCategory) {
+        return foods.stream().filter(food -> {
+            if(food.getFoodCategory()!=null){
+                return food.getFoodCategory().getName().equals(foodCategory);
+            }
+            return false;
+        }).collect(Collectors.toList());
+    }
+
+    private List<Food> filterByVegetarian(List<Food> foods, boolean isVegetarian) {
+        return foods.stream().filter(food -> food.isVegetarian()==isVegetarian).collect(Collectors.toList());
+    }
+
     public List<Food> searchFood(String keyword){
-        return null;
+        return foodRepository.searchFood(keyword);
     }
     public Food findFoodById(ObjectId id)throws  Exception{
-        return null;
+        Optional<Food> food = foodRepository.findById(id);
+        if(food.isEmpty()){
+            throw new Exception("Food not exist...");
+        }
+        return food.get();
     }
     public Food updateAvailabilityStatus(ObjectId foodId)throws Exception{
-        return null;
+        Food food = findFoodById(foodId);
+        food.setAvailable(!food.isAvailable());
+        return foodRepository.save(food);
     }
 }

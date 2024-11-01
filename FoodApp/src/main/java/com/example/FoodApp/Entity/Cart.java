@@ -22,5 +22,5 @@ public class Cart {
     private Long total;
 
     @DBRef
-    private List<CartItem> item = new ArrayList<>();
+    private List<CartItem> items = new ArrayList<>();
 }
